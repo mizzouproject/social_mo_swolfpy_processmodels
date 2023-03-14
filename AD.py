@@ -31,7 +31,7 @@ class AD(ProcessModel):
         self.flow_init = Flow(self.Material_Properties)
 
     def calc(self):
-        self.LCI = LCI(index=self.Index, n_col=51)
+        self.LCI = LCI(index=self.Index, n_col=185) #increase ncol value to support all the elements for social metrics
 
         # Methane Yield (m3/dry Mg)
         self.Material_Properties['Methane Yield'] = (
@@ -140,7 +140,11 @@ class AD(ProcessModel):
                      flow=capital_cost)
         self.LCI.add(name=('biosphere3','Operational_Cost'),
                      flow=[self.InputData.Operational_Cost[y]['amount'] for y in self.Index])
-
+        #social indicator 
+        for i in range(1, 4): # i from 1 to 3
+            self.LCI.add(name=('biosphere3','Social_test'+str(i)),
+                     flow=[self.InputData.Operational_Cost[y]['social_metric'+str(i)] for y in self.Index])
+                
     def setup_MC(self, seed=None):
         self.InputData.setup_MC(seed)
         #self.create_uncertainty_from_inputs()
@@ -259,9 +263,14 @@ class AD(ProcessModel):
         report["Technosphere"] = self.lci_report[tech_flows].transpose().to_dict()
 
         self.lci_report = self.lci_report.rename(columns=self._bio_rename_dict)
+        #social indicator
+        social_indicator=[]
+        for i in range(1,4):
+            social_indicator.append(('biosphere3','Social_test'+str(i)))
         report["Biosphere"] = self.lci_report[list(self._bio_rename_dict.values())
                                               + [('biosphere3','Capital_Cost'),
-                                                 ('biosphere3','Operational_Cost')]].transpose().to_dict()
+                                                 ('biosphere3','Operational_Cost')]
+                                              + social_indicator].transpose().to_dict()
         return(report)
 
     def plot(self, composition, saveHTML=False):
