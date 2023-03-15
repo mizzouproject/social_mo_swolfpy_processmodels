@@ -410,6 +410,12 @@ class SF_Col(ProcessModel):
 
                         self.result_destination[j][key][('biosphere3', 'Operational_Cost')] = (
                             self.output['C_collection'][j])
+                        
+                        if self.InputData.Social_Metric.get(j):
+                            #social indicator 
+                            for k in range(1, 4): # i from 1 to 3
+                                self.result_destination[j][key][('biosphere3', 'Social_test'+str(k))] = (
+                                    self.InputData.Social_Metric[j]['social_metric'+str(k)])
         else:
             self.calc_lci()
             self.result_destination = {}
