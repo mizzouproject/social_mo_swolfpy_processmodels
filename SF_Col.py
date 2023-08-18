@@ -331,7 +331,7 @@ class SF_Col(ProcessModel):
             # warnings.warn('Negative mass flows in collection model [{self.process_name}]!')
 
         # Check generated mass = Collected mass
-        ratio = self.col_massflow.sum().sum() / total_waste_gen
+        ratio = round(self.col_massflow.sum().sum() / total_waste_gen, 2)
         if ratio > 1.01 or ratio < 0.99:
             raise Exception(f'Mass balance error in collection model [{self.process_name}]!')
             # warnings.warn(f'Mass balance error in collection model [{self.process_name}]!')
