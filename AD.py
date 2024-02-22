@@ -31,7 +31,7 @@ class AD(ProcessModel):
         self.flow_init = Flow(self.Material_Properties)
 
     def calc(self):
-        self.LCI = LCI(index=self.Index, n_col=185) #increase ncol value to support all the elements for social metrics
+        self.LCI = LCI(index=self.Index, n_col=315) #increase ncol value to support all the elements for social metrics
 
         # Methane Yield (m3/dry Mg)
         self.Material_Properties['Methane Yield'] = (
@@ -144,6 +144,8 @@ class AD(ProcessModel):
         for i in range(1, 4): # i from 1 to 3
             self.LCI.add(name=('biosphere3','Social_test'+str(i)),
                      flow=[self.InputData.Operational_Cost[y]['social_metric'+str(i)] for y in self.Index])
+            self.LCI.add(name=('biosphere3','Social_Community'+str(i)),
+                     flow=[self.InputData.Operational_Cost[y]['social_community'+str(i)] for y in self.Index])
                 
     def setup_MC(self, seed=None):
         self.InputData.setup_MC(seed)
@@ -267,6 +269,8 @@ class AD(ProcessModel):
         social_indicator=[]
         for i in range(1,4):
             social_indicator.append(('biosphere3','Social_test'+str(i)))
+            social_indicator.append(('biosphere3','Social_Community'+str(i)))
+
         report["Biosphere"] = self.lci_report[list(self._bio_rename_dict.values())
                                               + [('biosphere3','Capital_Cost'),
                                                  ('biosphere3','Operational_Cost')]

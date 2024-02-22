@@ -416,6 +416,8 @@ class SF_Col(ProcessModel):
                             for k in range(1, 4): # i from 1 to 3
                                 self.result_destination[j][key][('biosphere3', 'Social_test'+str(k))] = (
                                     self.InputData.Social_Metric[j]['social_metric'+str(k)])
+                                self.result_destination[j][key][('biosphere3', 'Social_Community'+str(k))] = (
+                                    self.InputData.Social_Metric[j]['social_community'+str(k)])
         else:
             self.calc_lci()
             self.result_destination = {}

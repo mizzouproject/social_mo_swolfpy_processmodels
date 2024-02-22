@@ -249,6 +249,8 @@ class WTE(ProcessModel):
         for i in range(1, 4): # i from 1 to 3
             self.Cost[('biosphere3', 'Social_test'+str(i))] = [
                 self.InputData.Social_Metric[y]['social_metric'+str(i)] for y in self.Index]
+            self.Cost[('biosphere3', 'Social_Community'+str(i))] = [
+                self.InputData.Social_Metric[y]['social_community'+str(i)] for y in self.Index]
 
     def setup_MC(self, seed=None):
         self.InputData.setup_MC(seed)

@@ -190,6 +190,10 @@ class SS_MRF(ProcessModel):
                 ('biosphere3', 'Social_test'+str(i)), 
                 [self.InputData.Social_Metric[y]['social_metric'+str(i)] for y in self.Index] * self._Input
             )
+            self.LCI.add(
+                ('biosphere3', 'Social_Community'+str(i)), 
+                [self.InputData.Social_Metric[y]['social_community'+str(i)] for y in self.Index] * self._Input
+            )
 
 #%% Check Mass balance
         ### Check mass balance:

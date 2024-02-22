@@ -25,7 +25,7 @@ class Comp(ProcessModel):
         self.flow_init = Flow(self.Material_Properties)
 
     def calc(self):
-        self.LCI = LCI(index=self.Index,n_col=185) #add ncol value to support social metrics 
+        self.LCI = LCI(index=self.Index,n_col=315) #add ncol value to support social metrics 
         ### Initial mass at tipping floor
         self.input_flow = Flow(self.Material_Properties)
         self.input_flow.init_flow(1000)
@@ -168,6 +168,8 @@ class Comp(ProcessModel):
         for i in range(1, 4): # i from 1 to 3
             self.LCI.add(name=('biosphere3','Social_test'+str(i)),
                      flow=[self.InputData.Operational_Cost[y]['social_metric'+str(i)] for y in self.Index])
+            self.LCI.add(name=('biosphere3','Social_Community'+str(i)),
+                     flow=[self.InputData.Operational_Cost[y]['social_community'+str(i)] for y in self.Index])
 
     def setup_MC(self,seed=None):
         self.InputData.setup_MC(seed)
@@ -251,5 +253,6 @@ class Comp(ProcessModel):
             report['Biosphere'][y][('biosphere3','Operational_Cost')] = lci_report[('biosphere3','Operational_Cost')][y]
             for i in range(1,4):
                 report['Biosphere'][y][('biosphere3','Social_test'+str(i))] = lci_report[('biosphere3','Social_test'+str(i))][y]
+                report['Biosphere'][y][('biosphere3','Social_Community'+str(i))] = lci_report[('biosphere3','Social_Community'+str(i))][y]
 
         return report
