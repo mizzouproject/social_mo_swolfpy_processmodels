@@ -246,7 +246,7 @@ class WTE(ProcessModel):
         self.Cost[('biosphere3', 'Operational_Cost')] = self.InputData.Economic_parameters['O_M_cost']['amount']
 
         #social indicator 
-        for i in range(1, 4): # i from 1 to 3
+        for i in range(1, 3): # i from 1 to 3
             self.Cost[('biosphere3', 'Social_test'+str(i))] = [
                 self.InputData.Social_Metric[y]['social_metric'+str(i)] for y in self.Index]
             self.Cost[('biosphere3', 'Social_Community'+str(i))] = [

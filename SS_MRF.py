@@ -185,7 +185,7 @@ class SS_MRF(ProcessModel):
                         pv=Unit_capital_cost)
         self.LCI.add(('biosphere3', 'Capital_Cost'), capital_cost * self._Input)
 
-        for i in range(1, 4): # i from 1 to 3
+        for i in range(1, 3): # i from 1 to 3
             self.LCI.add(
                 ('biosphere3', 'Social_test'+str(i)), 
                 [self.InputData.Social_Metric[y]['social_metric'+str(i)] for y in self.Index] * self._Input

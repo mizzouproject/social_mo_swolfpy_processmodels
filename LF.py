@@ -650,7 +650,7 @@ class LF(ProcessModel):
         self.cost_DF[('biosphere3', 'Operational_Cost')] = [
             self.InputData.Operational_Cost[y]['amount'] for y in self.Index]
         #social indicator 
-        for i in range(1, 4): # i from 1 to 3
+        for i in range(1, 3): # i from 1 to 3
             self.cost_DF[('biosphere3', 'Social_test'+str(i))] = [
                 self.InputData.Operational_Cost[y]['social_metric'+str(i)] for y in self.Index]
             self.cost_DF[('biosphere3', 'Social_Community'+str(i))] = [
@@ -827,7 +827,7 @@ class LF(ProcessModel):
         self.bio_rename_dict = dict(self._key1, **self._key2)
         self.bio_rename_dict = dict(self.bio_rename_dict, **self._key3)
         self.bio_rename_dict[('biosphere3', 'Operational_Cost')] = ('biosphere3', 'Operational_Cost')
-        for i in range(1,4):
+        for i in range(1,3):
             self.bio_rename_dict[('biosphere3', 'Social_test'+str(i))] = ('biosphere3', 'Social_test'+str(i))
             self.bio_rename_dict[('biosphere3', 'Social_Community'+str(i))] = ('biosphere3', 'Social_Community'+str(i))
 
@@ -844,7 +844,7 @@ class LF(ProcessModel):
         self.LCI_bio[('biosphere3','Operational_Cost')] = self.cost_DF[('biosphere3','Operational_Cost')].values 
         
         #add here social values
-        for i in range(1,4):
+        for i in range(1,3):
             self.LCI_bio[('biosphere3','Social_test'+str(i))] = self.cost_DF[('biosphere3','Social_test'+str(i))].values
             self.LCI_bio[('biosphere3','Social_Community'+str(i))] = self.cost_DF[('biosphere3','Social_Community'+str(i))].values
         self.Biosphere = self.LCI_bio[self.bio_rename_dict.values()].transpose().to_dict()

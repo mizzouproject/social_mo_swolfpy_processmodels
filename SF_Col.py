@@ -413,7 +413,7 @@ class SF_Col(ProcessModel):
                         
                         if self.InputData.Social_Metric.get(j):
                             #social indicator 
-                            for k in range(1, 4): # i from 1 to 3
+                            for k in range(1, 3): # i from 1 to 3
                                 self.result_destination[j][key][('biosphere3', 'Social_test'+str(k))] = (
                                     self.InputData.Social_Metric[j]['social_metric'+str(k)])
                                 self.result_destination[j][key][('biosphere3', 'Social_Community'+str(k))] = (

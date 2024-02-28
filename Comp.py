@@ -25,7 +25,7 @@ class Comp(ProcessModel):
         self.flow_init = Flow(self.Material_Properties)
 
     def calc(self):
-        self.LCI = LCI(index=self.Index,n_col=315) #add ncol value to support social metrics 
+        self.LCI = LCI(index=self.Index,n_col=227) #add ncol value to support social metrics 
         ### Initial mass at tipping floor
         self.input_flow = Flow(self.Material_Properties)
         self.input_flow.init_flow(1000)
@@ -165,7 +165,7 @@ class Comp(ProcessModel):
                      flow=[self.InputData.Operational_Cost[y]['amount'] for y in self.Index])
 
         #social indicator 
-        for i in range(1, 4): # i from 1 to 3
+        for i in range(1, 3): # i from 1 to 3
             self.LCI.add(name=('biosphere3','Social_test'+str(i)),
                      flow=[self.InputData.Operational_Cost[y]['social_metric'+str(i)] for y in self.Index])
             self.LCI.add(name=('biosphere3','Social_Community'+str(i)),
@@ -251,7 +251,7 @@ class Comp(ProcessModel):
             report['Biosphere'][y][('biosphere3', '13331e67-6006-48c4-bdb4-340c12010036')] = lci_report['Ammonium, ion (surface water)'][y] # 'Ammonium, ion' (kilogram, None, ('water', 'surface water'))
             report['Biosphere'][y][('biosphere3','Capital_Cost')] = lci_report[('biosphere3','Capital_Cost')][y]
             report['Biosphere'][y][('biosphere3','Operational_Cost')] = lci_report[('biosphere3','Operational_Cost')][y]
-            for i in range(1,4):
+            for i in range(1,3):
                 report['Biosphere'][y][('biosphere3','Social_test'+str(i))] = lci_report[('biosphere3','Social_test'+str(i))][y]
                 report['Biosphere'][y][('biosphere3','Social_Community'+str(i))] = lci_report[('biosphere3','Social_Community'+str(i))][y]
 
